@@ -1,29 +1,31 @@
 const form = document.querySelector("form");
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
+if (form) {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    let isValid = true;
+        let isValid = true;
 
-    const fields = form.querySelectorAll("input, textarea, select, checkbox, radio");
+        const fields = form.querySelectorAll("input, textarea, select, checkbox, radio");
 
-    fields.forEach((field) => {
-        const fieldValid = validateField(field);
+        fields.forEach((field) => {
+            const fieldValid = validateField(field);
 
-        if (!fieldValid) {
-            isValid = false;
-            field.closest(".form-item").classList.add("error");
+            if (!fieldValid) {
+                isValid = false;
+                field.closest(".form-item").classList.add("error");
+            }
+        });
+
+        if (isValid) {
+            console.log('valid form');
+            // send form data
+            form.reset();
+        } else {
+            form.querySelector(".error input, .error textarea, .error select, .error checkbox, .error radio").focus();
         }
     });
-
-    if (isValid) {
-        console.log('valid form');
-        // send form data
-        form.reset();
-    } else {
-        form.querySelector(".error input, .error textarea, .error select, .error checkbox, .error radio").focus();
-    }
-});
+}
 
 function validateField(field) {
     let isValid = true;
@@ -72,3 +74,13 @@ document.addEventListener('blur', (e) => {
         validateField(field);
     }
 })
+
+function hasHorizontalOverflow(element) {
+    return element.scrollWidth > element.clientWidth;
+}
+
+// Usage
+const myElement = document.querySelector('.table-wrapper');
+if (hasHorizontalOverflow(myElement)) {
+    console.log('Horizontal overflow detected!');
+}

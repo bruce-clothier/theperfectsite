@@ -446,13 +446,14 @@ table thead {
 th, td {
     text-align: left;
     padding: .5rem;
+    font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
 tr {
     border-bottom: var(--line-width) solid var(--primary-color);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 750px) {
     .table-wrapper {
         overflow-x: hidden;
     }
